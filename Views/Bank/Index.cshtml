@@ -1,0 +1,32 @@
+@model TransActions
+
+<h1>Welcom @ViewBag.User.FirstName!</h1>
+<h1>Currnebt Balance: @ViewBag.Balance</h1>
+
+<a asp-action="LogOut" asp-controller="Home" class="btn btn-danger">Log Out</a>
+
+<form asp-action="Insert" asp-controller="Bank" method="POST">
+    <label asp-for="Amount">Withdarw/Deposit:</label>
+    <input asp-for="Amount"><br>
+    <input type="submit" value="Withdarw/Deposit" class="btn btn-warning">
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach( var a in ViewBag.User.MyTransactions)
+        {
+            <tr>
+                <td>@a.Amount</td>
+                <td>@a.CreatedAt.ToString("MMMM, dd yy")</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
